@@ -2,14 +2,14 @@ import { serve } from 'https://deno.land/std@0.194.0/http/server.ts';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+const SERVICE_ROLE_KEY = Deno.env.get('SERVICE_ROLE_KEY');
 const CLAUDE_API_KEY = Deno.env.get('CLAUDE_API_KEY');
 
-if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !CLAUDE_API_KEY) {
+if (!SUPABASE_URL || !SERVICE_ROLE_KEY || !CLAUDE_API_KEY) {
   throw new Error('Missing required environment variables for the Claude Edge Function.');
 }
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
